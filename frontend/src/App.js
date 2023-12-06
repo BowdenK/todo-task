@@ -19,7 +19,7 @@ const App = () => {
             element={<AddTodo />}
           />
           <Route
-            // dynamic :id to create custom route
+            // dynamic :id to create custom route.
             path='/'
             element={<EditTodo />}
           />
