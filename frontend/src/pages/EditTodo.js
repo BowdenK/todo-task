@@ -8,28 +8,36 @@ const EditTodo = () => {
     const [toUpdate, setToUpdate] = useState('')
     const [userInput, setUserInput] = useState('')
 
+    const fetchTodo = async () => {
+        let data = await getTodo(id)
+        setToUpdate(data)
+    }
+    
     const submitHandler = async () => {
         let obj = {
             _id: toUpdate._id,
             text: userInput
         }
 
+        await updateTodo(obj)
+        await fetchTodo()
         alert('edited item')
     }
 
     useEffect(() => {
-        const fetchTodo = async () => {
-            let data = await getTodo(id)
-            setToUpdate(data)
+        async function start(){
+        await fetchTodo()
         }
-        fetchTodo()
+        start()
     },[])
     return (
         <div>
             <h1>edit</h1>
             <h2>{toUpdate.text}</h2>
             <input 
-                onChange={() => {}}
+                text="text"
+                value={userInput}
+                onChange={(e) => {setUserInput(e.target.value)}}
             />
             <button onClick={submitHandler}>submit</button>
         </div>
